@@ -36,6 +36,9 @@ jobs:
           cd "bot"
           npm install
           filename=".env"
+          GUILD_ID=$GUILD_ID
+          CLIENT_ID=$CLIENT_ID
+          TOKEN=$TOKEN
           echo -e "GUILD_ID=$GUILD_ID\nCLIENT_ID=$CLIENT_ID\nTOKEN=$TOKEN" > $filename
           npm start
           
