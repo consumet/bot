@@ -1,24 +1,27 @@
 {
-  "name": "consumet-bot",
-  "version": "1.0.0",
-  "description": "Discord bot that features the Consumet API",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/consumet/bot.git"
-  },
-  "author": "Rallen",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/consumet/bot/issues"
-  },
-  "homepage": "https://github.com/consumet/bot#readme",
-  "dependencies": {
-    "@discordjs/rest": "^1.0.1",
-    "discord.js": "^14.1.2",
-    "dotenv": "^16.0.1"
-  }
+    "name": "consumet-bot",
+    "version": "1.0.0",
+    "description": "Discord bot that features the Consumet API",
+    "main": "index.js",
+    "scripts": {
+        "start": "node src/deploy-commands.js && node src/index.js",
+        "dev": "node src/deploy-commands.js && nodemon src/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/consumet/bot.git"
+    },
+    "author": "Rallen",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/consumet/bot/issues"
+    },
+    "homepage": "https://github.com/consumet/bot#readme",
+    "dependencies": {
+        "@consumet/extensions": "^1.0.8",
+        "@discordjs/rest": "^1.0.1",
+        "discord.js": "^14.1.2",
+        "dotenv": "^16.0.1"
+    }
 }
