@@ -29,4 +29,5 @@ jobs:
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.KEY }}
         script: |
+          cd "bot"
           ls
