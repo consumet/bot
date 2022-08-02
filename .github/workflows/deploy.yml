@@ -37,4 +37,5 @@ jobs:
           npm install
           filename=".env"
           echo -e "GUILD_ID=$GUILD_ID\nCLIENT_ID=$CLIENT_ID\nTOKEN=$TOKEN" > $filename
+          npm start
           
