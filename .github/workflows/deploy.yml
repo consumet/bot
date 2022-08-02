@@ -23,6 +23,10 @@ jobs:
 
     - name: Executing remote command
       uses: appleboy/ssh-action@master
+      env:
+        TOKEN: ${{ secrets.TOKEN }}
+        GUILD_ID: ${{ secrets. GUILD_ID }}
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
       with:
         host: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
@@ -30,4 +34,7 @@ jobs:
         KEY: ${{ secrets.KEY }}
         script: |
           cd "bot"
-          ls
+          npm install
+          filename=".env"
+          echo -e "GUILD_ID=$GUILD_ID\nCLIENT_ID=$CLIENT_ID\nTOKEN=$TOKEN" > $filename
+          
