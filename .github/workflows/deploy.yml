@@ -1,12 +1,15 @@
 name: Deploy
 
-on: []
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v1
     - name: Copy repository contents via scp
       uses: appleboy/scp-action@master
       env:
