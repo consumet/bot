@@ -33,7 +33,9 @@ module.exports = {
             .setTitle(provider.toString.name)
             .setColor(0x000000)
             .setDescription(
-                `For library usage, please refer to [this](https://github.com/consumet/consumet.ts/blob/master/docs/providers/${provider.toString.name.toLowerCase()}.md) page. For API usage, please refer to [this](https://docs.consumet.org/#tag/${provider.toString.name.toLowerCase()}) page.`
+                `For library usage, please refer to [this](https://github.com/consumet/consumet.ts/blob/master/docs/providers/${provider.toString.classPath
+     .split('.')[1]
+     .toLowerCase()}.md) page. For API usage, please refer to [this](https://docs.consumet.org/#tag/${provider.toString.name.toLowerCase()}) page.`
             )
             .addFields([{
                     name: 'Category',
