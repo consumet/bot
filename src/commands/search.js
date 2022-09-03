@@ -63,15 +63,25 @@ module.exports = {
             const embeds = [
                     ...res.map((r) =>
                         new EmbedBuilder()
-                        .setTitle(`${r.title.english ? r.title.english : r.title.romaji} (${r.title.native})`)
-                        .setURL(`https://anilist.co/anime/${r.id}`)
-                        .setColor(r.color)
-                        .addFields([
-                                { name: 'rating', value: `${r.rating ? `${parseFloat(r.rating / 10)}/10` : 'N/A'}`, inline: true },
-      { name: 'Format', value: `${r.format}`, inline: true },
-      { name: 'Status', value: `${r.status}`, inline: true },
-      { name: 'Release Date', value: `${r.releaseDate ? r.releaseDate : 'N/A'}`, inline: true },
-     ])
+                        .setTitle(
+                            `${r.title?.english ? (r.title.english ? r.title.english : r.title.romaji) : r.title} (${
+       r.title.native
+      })`
+                        )
+                        .setURL(`${r.url ? r.url : `https://anilist.co/anime/${r.id}`}`)
+     .setColor(r.color ? r.color : 0x000000)
+     .addFields(
+      [
+       r.rating
+        ? { name: 'rating', value: `${r.rating ? `${parseFloat(r.rating / 10)}/10` : 'N/A'}`, inline: true }
+        : null,
+       r.format ? { name: 'Format', value: `${r.format}`, inline: true } : null,
+       r.status ? { name: 'Status', value: `${r.status}`, inline: true } : null,
+       r.releaseDate
+        ? { name: 'Release Date', value: `${r.releaseDate ? r.releaseDate : 'N/A'}`, inline: true }
+        : null,
+      ].filter((f) => f)
+     )
      .setThumbnail(r.image)
    ),
   ];
