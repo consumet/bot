@@ -1,15 +1,15 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { PROVIDERS_LIST } = require('@consumet/extensions');
-const { capitalizeFirstLetter } = require('@consumet/extensions/dist/utils');
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { PROVIDERS_LIST } = require("@consumet/extensions");
+const { capitalizeFirstLetter } = require("@consumet/extensions/dist/utils");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('provider')
-        .setDescription('Get information about a provider')
+        .setName("provider")
+        .setDescription("Get information about a provider")
         .addStringOption((option) =>
             option
-            .setName('name')
-            .setDescription('Provider to search')
+            .setName("name")
+            .setDescription("Provider to search")
             .setRequired(true)
             .addChoices(
                 ...Object.keys(PROVIDERS_LIST)
@@ -24,37 +24,50 @@ module.exports = {
             )
         ),
     async execute(interaction) {
-        const category = interaction.options.getString('name').split('.')[0];
+        const category = interaction.options.getString("name").split(".")[0];
         const provider = PROVIDERS_LIST[category].find(
-            (p) => p.toString.classPath === interaction.options.getString('name')
+            (p) => p.toString.classPath === interaction.options.getString("name")
         );
 
         const embed = new EmbedBuilder()
             .setTitle(provider.toString.name)
+            .setURL(provider.toString.baseUrl)
             .setColor(0x000000)
             .setDescription(
                 `For library usage, please refer to [this](https://github.com/consumet/consumet.ts/blob/master/docs/providers/${provider.toString.classPath
-     .split('.')[1]
-     .toLowerCase()}.md) page. For API usage, please refer to [this](https://docs.consumet.org/#tag/${provider.toString.name.toLowerCase()}) page.`
+          .split(".")[1]
+          .toLowerCase()}.md) page. For API usage, please refer to [this](https://docs.consumet.org/#tag/${provider.toString.name
+          .toLowerCase()
+          .replace(/ /g, "")}) page.`
             )
             .addFields([{
-                    name: 'Category',
+                    name: "Category",
                     value: capitalizeFirstLetter(
-                        provider.toString.classPath.split('.')[0].replace(/_/g, ' ').toLocaleLowerCase()
+                        provider.toString.classPath
+                        .split(".")[0]
+                        .replace(/_/g, " ")
+                        .toLocaleLowerCase()
                     ),
                     inline: true,
                 },
                 {
-                    name: 'Availability',
-                    value: provider.toString.isWorking ? 'Available' : 'Unavailable',
+                    name: "Availability",
+                    value: provider.toString.isWorking ? "Available" : "Unavailable",
                     inline: true,
                 },
                 {
-                    name: 'Languages',
-                    value: typeof provider.toString.lang === 'object' ? provider.toString.lang.join(', ') : provider.toString.lang,
+                    name: "Languages",
+                    value: typeof provider.toString.lang === "object" ?
+                        provider.toString.lang.join(", ") :
+                        provider.toString.lang,
                     inline: true,
                 },
-                { name: 'ClassPath', value: provider.toString.classPath, inline: true },
+                { name: "ClassPath", value: provider.toString.classPath, inline: true },
+                {
+                    name: "Is NSFW?",
+                    value: provider.toString.isNSFW ? "Yes" : "No",
+                    inline: true,
+                },
             ])
             .setThumbnail(provider.toString.logo);
 
